@@ -6,17 +6,17 @@
 // ****************************************************************************
 // @HEADER
 
-#ifndef Tempus_StepperBEObserverBase_hpp
-#define Tempus_StepperBEObserverBase_hpp
+#ifndef Tempus_StepperBackwardEulerObserverBase_hpp
+#define Tempus_StepperBackwardEulerObserverBase_hpp
 
 #include "Tempus_config.hpp"
 #include "Tempus_SolutionHistory.hpp"
-#include "Tempus_StepperBEAppAction.hpp"
+#include "Tempus_StepperBackwardEulerAppAction.hpp"
 
 
 namespace Tempus {
 
-/** \brief Base observer for StepperBE.
+/** \brief Base observer for StepperBackwardEuler.
  *
  *  This class provides a means to observe values (e.g., solution variables
  *  through SolutionHistory, and stepper member data through the Stepper),
@@ -27,7 +27,7 @@ namespace Tempus {
  *  wishes to modify the solution and/or stepper data during the
  *  Stepper::takeStep, they should use the Modifier class (with care!).
  *
- *  Below is the BE algorithm with the locations of the observe calls
+ *  Below is the BackwardEuler algorithm with the locations of the observe calls
  *  italicized.
  *
  *  \f{algorithm}{
@@ -45,8 +45,8 @@ namespace Tempus {
  *  \f}
  */
 template<class Scalar>
-class StepperBEObserverBase
-  : virtual public Tempus::StepperBEAppAction<Scalar>
+class StepperBackwardEulerObserverBase
+  : virtual public Tempus::StepperBackwardEulerAppAction<Scalar>
 {
 private:
 
@@ -62,20 +62,20 @@ private:
    */
   void execute(
     Teuchos::RCP<SolutionHistory<Scalar> > sh,
-    Teuchos::RCP<StepperBE<Scalar> > stepper,
-    const typename StepperBEAppAction<Scalar>::ACTION_LOCATION actLoc)
+    Teuchos::RCP<StepperBackwardEuler<Scalar> > stepper,
+    const typename StepperBackwardEulerAppAction<Scalar>::ACTION_LOCATION actLoc)
   { this->observe(sh, stepper, actLoc); }
 
 public:
 
-  /// Observe BE Stepper.
+  /// Observe BackwardEuler Stepper.
   virtual void observe(
     Teuchos::RCP<const SolutionHistory<Scalar> > /* sh */,
-    Teuchos::RCP<const StepperBE<Scalar> > /* stepper */,
-    const typename StepperBEAppAction<Scalar>::ACTION_LOCATION actLoc) const = 0;
+    Teuchos::RCP<const StepperBackwardEuler<Scalar> > /* stepper */,
+    const typename StepperBackwardEulerAppAction<Scalar>::ACTION_LOCATION actLoc) = 0;
 
 };
 
 } // namespace Tempus
 
-#endif // Tempus_StepperBEObserverBase_hpp
+#endif // Tempus_StepperBackwardEulerObserverBase_hpp

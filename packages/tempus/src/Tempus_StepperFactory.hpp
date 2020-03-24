@@ -12,7 +12,6 @@
 #include "Teuchos_ParameterList.hpp"
 #include "Tempus_StepperForwardEuler.hpp"
 #include "Tempus_StepperBackwardEuler.hpp"
-#include "Tempus_StepperBE.hpp"
 #include "Tempus_StepperERK.hpp"
 #include "Tempus_StepperBDF2.hpp"
 #include "Tempus_StepperNewmarkImplicitAForm.hpp"
@@ -649,29 +648,6 @@ public:
     if (model != Teuchos::null) {
       stepper->setModel(model);
       setStepperSolverValues(stepper, stepperPL);
-      stepper->initialize();
-    }
-
-    return stepper;
-  }
-
-  Teuchos::RCP<StepperBE<Scalar> >
-  createStepperBE(
-    const Teuchos::RCP<const Thyra::ModelEvaluator<Scalar> >& model,
-    Teuchos::RCP<Teuchos::ParameterList> stepperPL)
-  {
-    auto stepper = Teuchos::rcp(new StepperBE<Scalar>());
-    setStepperImplicitValues(stepper, stepperPL);
-
-    if (model != Teuchos::null) {
-      stepper->setModel(model);
-      setStepperSolverValues(stepper, stepperPL);
-
-      std::string predictor = "None";
-      if (stepperPL != Teuchos::null) predictor =
-        stepperPL->get<std::string>("Predictor Stepper Type", predictor);
-      stepper->setPredictor(predictor);
-
       stepper->initialize();
     }
 
@@ -1648,8 +1624,6 @@ private:
     using Teuchos::rcp;
     if (stepperType == "Forward Euler")
       return createStepperForwardEuler(model, stepperPL);
-    else if (stepperType == "BE")
-      return createStepperBE(model, stepperPL);
     else if (stepperType == "Backward Euler")
       return createStepperBackwardEuler(model, stepperPL);
     else if (stepperType == "Trapezoidal Method")

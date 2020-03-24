@@ -248,8 +248,6 @@ void StepperERK<Scalar>::takeStep(
       stepperRKAppAction_->execute(solutionHistory, thisStepper,
         StepperRKAppAction<Scalar>::ACTION_LOCATION::BEGIN_STAGE);
       stepperRKAppAction_->execute(solutionHistory, thisStepper,
-       StepperRKAppAction<Scalar>::ACTION_LOCATION::BEFORE_IMPLICIT_EXPLICITLY);
-      stepperRKAppAction_->execute(solutionHistory, thisStepper,
         StepperRKAppAction<Scalar>::ACTION_LOCATION::BEFORE_SOLVE);
 
       if ( i == 0 && this->getUseFSAL() &&

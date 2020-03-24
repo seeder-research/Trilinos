@@ -6,17 +6,17 @@
 // ****************************************************************************
 // @HEADER
 
-#ifndef Tempus_StepperBEModifierXBase_hpp
-#define Tempus_StepperBEModifierXBase_hpp
+#ifndef Tempus_StepperBackwardEulerModifierXBase_hpp
+#define Tempus_StepperBackwardEulerModifierXBase_hpp
 
 #include "Tempus_config.hpp"
 #include "Tempus_SolutionHistory.hpp"
-#include "Tempus_StepperBEAppAction.hpp"
+#include "Tempus_StepperBackwardEulerAppAction.hpp"
 
 
 namespace Tempus {
 
-/** \brief Base ModifierX for StepperBE.
+/** \brief Base ModifierX for StepperBackwardEuler.
  *
  *  This class provides a means to modify just the solution values
  *  (i.e., \f$x\f$ and \f$dot{x}\f$), and nothing else, but time and
@@ -28,7 +28,7 @@ namespace Tempus {
  *  affecting the Stepper correctness, performance, accuracy and stability
  *  (i.e., USER BEWARE!!).
  *
- *  Below is the BE algorithm with the locations of the ModifierX calls
+ *  Below is the BackwardEuler algorithm with the locations of the ModifierX calls
  *  italicized.
  *
  *  \f{algorithm}{
@@ -46,8 +46,8 @@ namespace Tempus {
  *  \f}
  */
 template<class Scalar>
-class StepperBEModifierXBase
-  : virtual public Tempus::StepperBEAppAction<Scalar>
+class StepperBackwardEulerModifierXBase
+  : virtual public Tempus::StepperBackwardEulerAppAction<Scalar>
 {
 private:
 
@@ -59,15 +59,15 @@ private:
    *  implement the modify function.
    *
    *  For the ModifierX interface, this adaptor maps the
-   *  StepperBEAppAction::ACTION_LOCATION to the
-   *  StepperBEModifierX::MODIFIERX_TYPE, and only pass the solution
+   *  StepperBackwardEulerAppAction::ACTION_LOCATION to the
+   *  StepperBackwardEulerModifierX::MODIFIERX_TYPE, and only pass the solution
    *  (\f$x\f$ and/or \f$\dot{x}\f$ and other parameters to the modify
    *  function.
    */
   void execute(
     Teuchos::RCP<SolutionHistory<Scalar> > sh,
-    Teuchos::RCP<StepperBE<Scalar> > stepper,
-    const typename StepperBEAppAction<Scalar>::ACTION_LOCATION actLoc)
+    Teuchos::RCP<StepperBackwardEuler<Scalar> > stepper,
+    const typename StepperBackwardEulerAppAction<Scalar>::ACTION_LOCATION actLoc)
   {
     using Teuchos::RCP;
 
@@ -78,25 +78,25 @@ private:
     RCP<Thyra::VectorBase<Scalar> > x;
 
     switch(actLoc) {
-      case StepperBEAppAction<Scalar>::BEGIN_STEP:
+      case StepperBackwardEulerAppAction<Scalar>::BEGIN_STEP:
       {
         modType = X_BEGIN_STEP;
         x = workingState->getX();
         break;
       }
-      case StepperBEAppAction<Scalar>::BEFORE_SOLVE:
+      case StepperBackwardEulerAppAction<Scalar>::BEFORE_SOLVE:
       {
         modType = X_BEFORE_SOLVE;
         x = workingState->getX();
         break;
       }
-      case StepperBEAppAction<Scalar>::AFTER_SOLVE:
+      case StepperBackwardEulerAppAction<Scalar>::AFTER_SOLVE:
       {
         modType = X_AFTER_SOLVE;
         x = workingState->getX();
         break;
       }
-      case StepperBEAppAction<Scalar>::END_STEP:
+      case StepperBackwardEulerAppAction<Scalar>::END_STEP:
       {
         modType = XDOT_END_STEP;
         x = stepper->getStepperXDot(workingState);
@@ -130,4 +130,4 @@ public:
 
 } // namespace Tempus
 
-#endif // Tempus_StepperBEModifierXBase_hpp
+#endif // Tempus_StepperBackwardEulerModifierXBase_hpp

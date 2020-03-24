@@ -6,44 +6,44 @@
 // ****************************************************************************
 // @HEADER
 
-#ifndef Tempus_StepperBEModifierX_hpp
-#define Tempus_StepperBEModifierX_hpp
+#ifndef Tempus_StepperBackwardEulerModifierX_hpp
+#define Tempus_StepperBackwardEulerModifierX_hpp
 
 #include "Tempus_config.hpp"
 #include "Tempus_SolutionHistory.hpp"
-#include "Tempus_StepperBEModifierXBase.hpp"
+#include "Tempus_StepperBackwardEulerModifierXBase.hpp"
 
 
 namespace Tempus {
 
-/** \brief Default ModifierX for StepperBE.
+/** \brief Default ModifierX for StepperBackwardEuler.
  *
  *  The default provides no-op functionality for ModifierX.
- *  See StepperBEModifierXBase for details on the algorithm.
+ *  See StepperBackwardEulerModifierXBase for details on the algorithm.
  */
 template<class Scalar>
-class StepperBEModifierXDefault
-  : virtual public Tempus::StepperBEModifierXBase<Scalar>
+class StepperBackwardEulerModifierXDefault
+  : virtual public Tempus::StepperBackwardEulerModifierXBase<Scalar>
 {
 public:
 
   /// Constructor
-  StepperBEModifierXDefault(){}
+  StepperBackwardEulerModifierXDefault(){}
 
   /// Destructor
-  virtual ~StepperBEModifierXDefault(){}
+  virtual ~StepperBackwardEulerModifierXDefault(){}
 
   /// Modify solution based on the MODIFIER_TYPE.
   virtual void modify(
     Teuchos::RCP<Thyra::VectorBase<Scalar> > /* x */,
     const Scalar /* time */, const Scalar /* dt */,
-    const typename StepperBEModifierXBase<Scalar>::MODIFIER_TYPE modType)
+    const typename StepperBackwardEulerModifierXBase<Scalar>::MODIFIER_TYPE modType)
   {
     switch(modType) {
-      case StepperBEModifierXBase<Scalar>::X_BEGIN_STEP:
-      case StepperBEModifierXBase<Scalar>::X_BEFORE_SOLVE:
-      case StepperBEModifierXBase<Scalar>::X_AFTER_SOLVE:
-      case StepperBEModifierXBase<Scalar>::XDOT_END_STEP:
+      case StepperBackwardEulerModifierXBase<Scalar>::X_BEGIN_STEP:
+      case StepperBackwardEulerModifierXBase<Scalar>::X_BEFORE_SOLVE:
+      case StepperBackwardEulerModifierXBase<Scalar>::X_AFTER_SOLVE:
+      case StepperBackwardEulerModifierXBase<Scalar>::XDOT_END_STEP:
       {
         // No-op.
         break;
@@ -58,4 +58,4 @@ public:
 
 } // namespace Tempus
 
-#endif // Tempus_StepperBEModifierX_hpp
+#endif // Tempus_StepperBackwardEulerModifierX_hpp

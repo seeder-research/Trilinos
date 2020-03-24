@@ -86,13 +86,13 @@ public:
   /// Constructor
   StepperBackwardEuler(
     const Teuchos::RCP<const Thyra::ModelEvaluator<Scalar> >& appModel,
-    const Teuchos::RCP<StepperBackwardEulerAppAction<Scalar> >& stepperBEAppAction,
     const Teuchos::RCP<Thyra::NonlinearSolverBase<Scalar> >& solver,
     const Teuchos::RCP<Stepper<Scalar> >& predictorStepper,
     bool useFSAL,
     std::string ICConsistency,
     bool ICConsistencyCheck,
-    bool zeroInitialGuess);
+    bool zeroInitialGuess,
+    const Teuchos::RCP<StepperBackwardEulerAppAction<Scalar> >& stepperBEAppAction);
 
   /// \name Basic stepper methods
   //@{
@@ -106,10 +106,10 @@ public:
     { return stepperBEObserver_; }
 #endif
 
-    virtual void setBEAppAction(
-      Teuchos::RCP<StepperBEAppAction<Scalar> > appAction);
+    virtual void setAppAction(
+      Teuchos::RCP<StepperBackwardEulerAppAction<Scalar> > appAction);
 
-    virtual Teuchos::RCP<StepperBEAppAction<Scalar> > getBEAppAction() const
+    virtual Teuchos::RCP<StepperBackwardEulerAppAction<Scalar> > getAppAction() const
     { return stepperBEAppAction_; }
 
     /// Set the predictor
@@ -202,8 +202,11 @@ private:
 
 private:
 
-  Teuchos::RCP<Stepper<Scalar> >                      predictorStepper_;
+  Teuchos::RCP<Stepper<Scalar> >                       predictorStepper_;
+#ifndef TEMPUS_HIDE_DEPRECATED_CODE
   Teuchos::RCP<StepperBackwardEulerObserver<Scalar> > stepperBEObserver_;
+#endif
+  Teuchos::RCP<StepperBackwardEulerAppAction<Scalar> > stepperBEAppAction_;
 
 };
 

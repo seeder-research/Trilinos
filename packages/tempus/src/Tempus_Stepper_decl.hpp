@@ -67,7 +67,7 @@ public:
   /// \name Basic stepper methods
   //@{
     virtual void setModel(
-      const Teuchos::RCP<const Thyra::ModelEvaluator<Scalar> >& appModel) = 0;
+      const Teuchos::RCP<const Thyra::ModelEvaluator<Scalar> >& appModel) {}
 
 #ifndef TEMPUS_HIDE_DEPRECATED_CODE
     TEMPUS_DEPRECATED
@@ -75,22 +75,24 @@ public:
       const Teuchos::RCP<Thyra::ModelEvaluator<Scalar> >& /* appModel */){}
 
 #endif // TEMPUS_HIDE_DEPRECATED_CODE
-    virtual Teuchos::RCP<const Thyra::ModelEvaluator<Scalar> > getModel() = 0;
+    virtual Teuchos::RCP<const Thyra::ModelEvaluator<Scalar> > getModel()
+    { return Teuchos::null; }
 
     /// Set solver.
     virtual void setSolver(
-      Teuchos::RCP<Thyra::NonlinearSolverBase<Scalar> > solver) = 0;
+      Teuchos::RCP<Thyra::NonlinearSolverBase<Scalar> > solver) {}
 
     /// Get solver
-    virtual Teuchos::RCP<Thyra::NonlinearSolverBase<Scalar> >
-      getSolver() const = 0;
+    virtual Teuchos::RCP<Thyra::NonlinearSolverBase<Scalar> > getSolver() const
+    { return Teuchos::null; }
 
     /// Set Observer
     virtual void setObserver(
-      Teuchos::RCP<StepperObserver<Scalar> > obs = Teuchos::null) = 0;
+      Teuchos::RCP<StepperObserver<Scalar> > obs = Teuchos::null){}
 
     /// Get Observer
-    virtual Teuchos::RCP<StepperObserver<Scalar> >  getObserver() const = 0;
+    virtual Teuchos::RCP<StepperObserver<Scalar> >  getObserver() const
+    { return Teuchos::null; }
 
     /// Initialize after construction and changing input parameters.
     virtual void initialize();
