@@ -1239,15 +1239,15 @@ protected:
 
     // Fill A:
     A(0,0) = zero; A(0,1) = zero; A(1,1) = zero;
-    A(1,0) = (2*one)/(3*one); 
+    A(1,0) = (2*one)/(3*one);
 
     // Fill b:
-    b(0) = (1*one)/(4*one); 
-    b(1) = (3*one)/(4*one); 
+    b(0) = (1*one)/(4*one);
+    b(1) = (3*one)/(4*one);
 
     // fill c:
     c(0) = zero;
-    c(1) = (2*one)/(3*one); 
+    c(1) = (2*one)/(3*one);
 
 
     this->tableau_ = Teuchos::rcp(new RKButcherTableau<Scalar>(
@@ -1353,7 +1353,7 @@ protected:
  *  \f[
  *  \begin{array}{c|c}
  *    c & A \\ \hline
- *      & b^T \\ \hline
+ *      & b^T \\
  *      & \hat{b}^T
  *  \end{array}
  *
@@ -1846,18 +1846,19 @@ protected:
  *      & b^T
  *  \end{array}
  *  \;\;\;\;\mbox{ where }\;\;\;\;
- *  \begin{array}{c|cc}  \gamma  & \gamma      &         & \\
- *                      1-\gamma & 1-2\gamma   & \gamma  & \\ \hline
- *                      1-2      & 1/2 -\gamma & 0       & \gamma \\ \hline
- *                               & 1/6         & 1/6     & 2/3   \end{array}
+ *  \begin{array}{c|ccc}  \gamma  & \gamma      &         &        \\
+ *                       1-\gamma & 1-2\gamma   & \gamma  &        \\
+ *                       1-2      & 1/2 -\gamma & 0       & \gamma \\ \hline
+ *                                & 1/6         & 1/6     & 2/3
+ *  \end{array}
  *  \f]
  *  The value is \f$\gamma = 1/ (2 + \sqrt{2})\f$.
  *  This will produce an L-stable 2nd order method with the stage
- *  times within the timestep.  
+ *  times within the timestep.
  *
  *  Reference: Implicit-explicit Runge-Kutta schemes and applications to
  *             hyperbolic systems with relaxation
- *             L Pareschi, G Russo 
+ *             L Pareschi, G Russo
  *             Journal of Scientific computing, 2005 - Springer
  *             Table 5
  */
@@ -2781,7 +2782,7 @@ protected:
  *  \f[
  *  \begin{array}{c|c}
  *    c & A \\ \hline
- *      & b^T \\ \hline
+ *      & b^T \\
  *      & \hat{b}^T
  *  \end{array}
  *  \;\;\;\;\mbox{ where }\;\;\;\;
@@ -2888,12 +2889,12 @@ protected:
  *  \f[
  *  \begin{array}{c|c}
  *    c & A \\ \hline
- *      & b^T \\ \hline
+ *      & b^T \\
  *      & \hat{b}^T
  *  \end{array}
  *  \;\;\;\;\mbox{ where }\;\;\;\;
- *  \begin{array}{c|cccc}  1/6  & 1/6  & \\
- *                         1/2  & 1/3  & 1/6 & \\   \hline
+ *  \begin{array}{c|cccc}  1/6  & 1/6  &           \\
+ *                         1/2  & 1/3  & 1/6 &     \\
  *                         5/6  & 1/3  & 1/3 & 1/3 \\   \hline
  *                              & 1/3  & 1/3 & 1/3  \end{array}
  *  \f]
@@ -2999,7 +3000,7 @@ protected:
  *  \f[
  *  \begin{array}{c|c}
  *    c & A \\ \hline
- *      & b^T \\ \hline
+ *      & b^T \\
  *      & \hat{b}^T
  *  \end{array}
  *  \;\;\;\;\mbox{ where }\;\;\;\;
@@ -3107,12 +3108,12 @@ protected:
  *  \f[
  *  \begin{array}{c|c}
  *    c & A \\ \hline
- *      & b^T \\ \hline
+ *      & b^T \\
  *      & \hat{b}^T
  *  \end{array}
  *  \;\;\;\;\mbox{ where }\;\;\;\;
  *  \begin{array}{c|cccc}  1/6  & 1/6  & \\
- *                         1/2  & 1/3  & 1/6 & \\   \hline
+ *                         1/2  & 1/3  & 1/6 & \\
  *                         5/6  & 1/3  & 1/3 & 1/3 \\   \hline
  *                              & 1/3  & 1/3 & 1/3  \end{array}
  *  \f]
@@ -4053,7 +4054,7 @@ protected:
  *      & b^T
  *  \end{array}
  *  \;\;\;\;\mbox{ where }\;\;\;\;
- *  \begin{array}{c|cc} \gamma  & \gamma &        \\
+ *  \begin{array}{c|cc} \gamma  &   \gamma &        \\
  *                         1    & 1-\gamma & \gamma \\ \hline
  *                              & 1-\gamma & \gamma  \end{array}
  *  \f]
